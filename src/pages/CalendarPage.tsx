@@ -29,7 +29,7 @@ export default function CalendarPage() {
   }, [year, month])
 
   const dayEvents = data.events.filter((e) => e.date === selected)
-  const monthLabel = new Date(year, month, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' })
+  const monthLabel = new Date(year, month, 1).toLocaleString('en-MY', { month: 'long', year: 'numeric' })
 
   const shiftMonth = (delta: number) => {
     const d = new Date(year, month + delta, 1)

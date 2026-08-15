@@ -48,7 +48,7 @@ type DataContextValue = {
 const DataContext = createContext<DataContextValue | null>(null)
 
 function storageKey(userId: string | undefined, isDemo: boolean) {
-  if (isDemo) return 'atelier_data_demo'
+  if (isDemo) return 'atelier_data_demo_my'
   if (userId) return `atelier_data_${userId}`
   return null
 }

@@ -33,6 +33,18 @@ const emptyProfile = {
   bio: '',
 }
 
+export const demoUser: User = {
+  id: 'demo',
+  name: 'Aiman Rahman',
+  email: 'demo@atelier.my',
+  company: 'Atelier KL',
+  role: 'Creative director',
+  phone: '+60 12-345 6789',
+  location: 'Kuala Lumpur, Malaysia',
+  website: 'https://atelier.my',
+  bio: 'Studio reka bentuk di KL. Brand system, UI produk, dan campaign untuk pasukan kecil.',
+}
+
 function normalizeUser(raw: Partial<User> & { id: string; name: string; email: string; company: string }): User {
   return {
     id: raw.id,
@@ -70,6 +82,7 @@ function loadSession(): { user: User | null; isDemo: boolean } {
     if (!raw) return { user: null, isDemo: false }
     const parsed = JSON.parse(raw) as { user: (User & { plan?: string }) | null; isDemo: boolean }
     if (!parsed.user) return { user: null, isDemo: parsed.isDemo }
+    if (parsed.isDemo) return { user: demoUser, isDemo: true }
     const { plan: _plan, ...rest } = parsed.user
     return { user: normalizeUser(rest), isDemo: parsed.isDemo }
   } catch {
@@ -137,20 +150,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       },
       enterDemo: () => {
-        persist(
-          {
-            id: 'demo',
-            name: 'Alex Rivera',
-            email: 'demo@atelier.app',
-            company: 'Rivera Studio',
-            role: 'Creative director',
-            phone: '+1 (415) 555-0142',
-            location: 'Oakland, CA',
-            website: 'https://riverastudio.example',
-            bio: 'Independent design studio focused on brand systems and product UI for early-stage teams.',
-          },
-          true,
-        )
+        persist(demoUser, true)
       },
       logout: () => persist(null, false),
     }),

@@ -9,7 +9,7 @@ export default function Settings() {
   const { resetDemo } = useData()
   const navigate = useNavigate()
   const [notify, setNotify] = useState({ email: true, overdue: true, weekly: false })
-  const [currency, setCurrency] = useState('USD')
+  const [currency, setCurrency] = useState('MYR')
   const [weekStart, setWeekStart] = useState('monday')
 
   return (
@@ -22,10 +22,10 @@ export default function Settings() {
           <div>
             <label className="mb-1 block text-sm font-medium">Default currency</label>
             <select className="field" value={currency} onChange={(e) => setCurrency(e.target.value)}>
+              <option value="MYR">MYR (RM)</option>
+              <option value="SGD">SGD</option>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
-              <option value="GBP">GBP</option>
-              <option value="SGD">SGD</option>
             </select>
           </div>
           <div>

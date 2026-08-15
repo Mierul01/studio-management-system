@@ -106,15 +106,15 @@ export function uid(prefix = 'id') {
 }
 
 export function formatMoney(n: number) {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-MY', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'MYR',
     maximumFractionDigits: 0,
   }).format(n)
 }
 
 export function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', {
+  return new Date(iso).toLocaleDateString('en-MY', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',

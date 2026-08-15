@@ -107,7 +107,7 @@ export default function Landing() {
             <div className="grid gap-3 p-4 sm:grid-cols-3">
               <div className="rounded-2xl bg-white/10 p-3 sm:col-span-2">
                 <p className="text-xs text-white/60">Revenue this month</p>
-                <p className="mt-1 font-display text-2xl font-bold text-white">$16,500</p>
+                <p className="mt-1 font-display text-2xl font-bold text-white">RM 16,500</p>
                 <svg viewBox="0 0 240 60" className="mt-3 w-full" aria-hidden>
                   <path
                     d="M0 45 C40 40, 60 20, 90 28 S140 50, 170 22 S210 10, 240 18"
@@ -130,7 +130,7 @@ export default function Landing() {
               </div>
               <div className="rounded-2xl bg-white/10 p-3 sm:col-span-2">
                 <p className="text-xs text-white/60">Next up</p>
-                <p className="mt-1 text-sm font-semibold text-white">Northwind design review · Thu 2:00</p>
+                <p className="mt-1 text-sm font-semibold text-white">Kopi Lab design review · Thu 2:00</p>
               </div>
             </div>
           </div>

@@ -4,9 +4,9 @@
 
 Repository: [Mierul01/studio-management-system](https://github.com/Mierul01/studio-management-system)
 
-![Atelier dashboard — cobalt sidebar, metric cards, projects, and upcoming events](docs/dashboard.png)
+![Atelier dashboard — Malaysian demo workspace with RM revenue, Kopi Lab, Batik House, and FitNation Raya](docs/dashboard.png)
 
-The screenshot above is the live **Dashboard**: a full-page SaaS layout with a cobalt sidebar, compact header, revenue cards, project progress, and upcoming meetings or deadlines.
+The screenshot above is the live **Dashboard**: a full-page SaaS layout with a cobalt sidebar, compact header, and a Malaysian demo studio (Atelier KL). Money is in **RM**, and sample clients include Kopi Lab PJ, Batik House, Suara Editorial, and FitNation KL.
 
 ---
 
