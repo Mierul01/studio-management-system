@@ -57,44 +57,61 @@ export default function Clients() {
       {data.clients.length === 0 ? (
         <EmptyState title="No clients yet" hint="Add your first client to start the pipeline." />
       ) : (
-        <div className="panel overflow-hidden">
+        <div className="panel overflow-hidden p-2 sm:p-3">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] text-left text-sm">
-              <thead className="border-b border-ink/8 bg-mist/50 text-xs uppercase tracking-wide text-muted">
+            <table className="w-full min-w-[700px] text-left text-sm">
+              <thead className="text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Client</th>
-                  <th className="px-4 py-3 font-semibold">Status</th>
-                  <th className="px-4 py-3 font-semibold">Value</th>
-                  <th className="px-4 py-3 font-semibold">Email</th>
-                  <th className="px-4 py-3 font-semibold" />
+                  <th className="px-4 py-3">Client</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Value</th>
+                  <th className="px-4 py-3">Email</th>
+                  <th className="px-4 py-3">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {data.clients.map((c) => (
-                  <tr key={c.id} className="border-b border-ink/5 last:border-0">
-                    <td className="px-4 py-3">
-                      <p className="font-semibold">{c.name}</p>
-                      <p className="text-xs text-muted">{c.company}</p>
-                    </td>
-                    <td className="px-4 py-3">
-                      <StatusPill status={c.status} />
-                    </td>
-                    <td className="px-4 py-3 font-medium">{formatMoney(c.value)}</td>
-                    <td className="px-4 py-3 text-muted">{c.email}</td>
-                    <td className="px-4 py-3 text-right">
-                      <button type="button" className="mr-2 text-sm font-semibold text-teal" onClick={() => startEdit(c)}>
-                        Edit
-                      </button>
-                      <button
-                        type="button"
-                        className="text-sm font-semibold text-danger"
-                        onClick={() => deleteClient(c.id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {data.clients.map((c) => {
+                  const initials = c.name
+                    .split(' ')
+                    .map((p) => p[0])
+                    .join('')
+                    .slice(0, 2)
+                    .toUpperCase()
+                  return (
+                    <tr key={c.id} className="data-row">
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-mist text-xs font-bold text-accent group-hover:bg-white/20">
+                            {initials}
+                          </span>
+                          <div>
+                            <p className="font-semibold">{c.name}</p>
+                            <p className="text-xs text-muted">{c.company}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <StatusPill status={c.status} />
+                      </td>
+                      <td className="px-4 py-3 font-medium">{formatMoney(c.value)}</td>
+                      <td className="px-4 py-3 text-muted">{c.email}</td>
+                      <td className="px-4 py-3">
+                        <div className="flex gap-3">
+                          <button type="button" className="text-sm font-semibold" onClick={() => startEdit(c)}>
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            className="text-sm font-semibold opacity-80"
+                            onClick={() => deleteClient(c.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>

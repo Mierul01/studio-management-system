@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useData } from '../context/DataContext'
 import { formatMoney } from '../types'
-import { PageHeader, StatCard, StatusPill } from '../components/ui'
+import { StatCard, StatusPill } from '../components/ui'
 
 export default function Dashboard() {
   const { data } = useData()
@@ -15,28 +15,18 @@ export default function Dashboard() {
 
   return (
     <div>
-      <PageHeader
-        title="Dashboard"
-        subtitle="Your studio at a glance."
-        action={
-          <Link to="/app/projects" className="btn-primary text-sm">
-            View projects
-          </Link>
-        }
-      />
-
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Paid revenue" value={formatMoney(paidTotal)} hint="From paid invoices" />
         <StatCard label="Outstanding" value={formatMoney(unpaidTotal)} hint={`${unpaid.length} open invoices`} />
         <StatCard label="Active projects" value={String(activeProjects.length)} hint="In flight or review" />
         <StatCard label="Open tasks" value={String(openTasks.length)} hint="Todo + doing" />
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-2">
-        <div className="panel p-5">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-lg font-bold">Projects</h2>
-            <Link to="/app/projects" className="text-sm font-semibold text-accent">
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <div className="panel p-4">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="font-display text-sm font-bold">Projects</h2>
+            <Link to="/app/projects" className="text-xs font-semibold text-accent">
               All
             </Link>
           </div>
@@ -45,7 +35,7 @@ export default function Dashboard() {
               <li key={p.id} className="rounded-lg bg-mist/80 px-3 py-3">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="font-semibold">{p.name}</p>
+                    <p className="text-sm font-semibold">{p.name}</p>
                     <p className="text-xs text-muted">{clientName(p.clientId)}</p>
                   </div>
                   <StatusPill status={p.status} />
@@ -58,10 +48,10 @@ export default function Dashboard() {
           </ul>
         </div>
 
-        <div className="panel p-5">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-lg font-bold">Upcoming</h2>
-            <Link to="/app/calendar" className="text-sm font-semibold text-accent">
+        <div className="panel p-4">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="font-display text-sm font-bold">Upcoming</h2>
+            <Link to="/app/calendar" className="text-xs font-semibold text-accent">
               Calendar
             </Link>
           </div>
@@ -69,7 +59,7 @@ export default function Dashboard() {
             {upcoming.map((e) => (
               <li key={e.id} className="flex items-center justify-between gap-3 rounded-lg bg-mist/80 px-3 py-3">
                 <div>
-                  <p className="font-semibold">{e.title}</p>
+                  <p className="text-sm font-semibold">{e.title}</p>
                   <p className="text-xs text-muted">
                     {e.date} · {e.time}
                   </p>

@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #0c1a1f;
-  --color-ink-soft: #24353c;
-  --color-mist: #f0f4f7;
-  --color-fog: #d6e0e7;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #1e2433;
+  --color-ink-soft: #4a5568;
+  --color-mist: #eef1f6;
+  --color-fog: #dbe1ea;
   --color-paper: #ffffff;
-  --color-accent: #e25b2a;
-  --color-accent-deep: #c4471c;
-  --color-teal: #1a7a6d;
-  --color-teal-soft: #d8efe9;
-  --color-amber: #c9851a;
-  --color-danger: #c0392b;
-  --color-muted: #5c6d75;
+  --color-accent: #2b59ff;
+  --color-accent-deep: #1f46d6;
+  --color-teal: #12b76a;
+  --color-teal-soft: #e8f8ef;
+  --color-amber: #f79009;
+  --color-danger: #f04438;
+  --color-muted: #8b95a7;
+  --color-sidebar: #2b59ff;
 }
 
 * {
@@ -29,6 +30,8 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.45;
   color: var(--color-ink);
   background: var(--color-mist);
   -webkit-font-smoothing: antialiased;
@@ -90,17 +93,13 @@ button, input, select, textarea {
 
 .hero-atmosphere {
   background:
-    radial-gradient(ellipse 80% 60% at 15% 20%, rgba(26, 122, 109, 0.22), transparent 55%),
-    radial-gradient(ellipse 70% 50% at 85% 15%, rgba(226, 91, 42, 0.18), transparent 50%),
-    radial-gradient(ellipse 60% 45% at 50% 90%, rgba(201, 133, 26, 0.12), transparent 55%),
-    linear-gradient(165deg, #e8eef3 0%, #f4f7f9 45%, #dde8ee 100%);
+    radial-gradient(ellipse 80% 60% at 12% 18%, rgba(43, 89, 255, 0.22), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 88% 12%, rgba(18, 183, 106, 0.12), transparent 50%),
+    linear-gradient(165deg, #e8edf8 0%, #f5f7fb 45%, #e4e9f4 100%);
 }
 
-.app-bg {
-  background:
-    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(26, 122, 109, 0.08), transparent 50%),
-    radial-gradient(ellipse 40% 30% at 0% 100%, rgba(226, 91, 42, 0.06), transparent 45%),
-    var(--color-mist);
+.app-shell {
+  background: var(--color-mist);
 }
 
 .noise-overlay::before {
@@ -108,34 +107,46 @@ button, input, select, textarea {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.035;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 0.35rem;
-  font-size: 0.75rem;
+  gap: 0.3rem;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: capitalize;
+  background: #f3f5f9;
+  color: var(--color-ink-soft);
+}
+
+.status-pill::before {
+  content: "";
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: currentColor;
 }
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: var(--color-accent);
   color: white;
   font-weight: 600;
-  padding: 0.75rem 1.35rem;
+  padding: 0.5rem 0.95rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  font-size: 0.8rem;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 6px 14px rgba(43, 89, 255, 0.22);
 }
 
 .btn-primary:hover {
@@ -147,41 +158,113 @@ button, input, select, textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: transparent;
   color: var(--color-ink);
   font-weight: 600;
-  padding: 0.75rem 1.35rem;
+  padding: 0.5rem 0.95rem;
   border: 1.5px solid var(--color-fog);
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   cursor: pointer;
+  font-size: 0.8rem;
   transition: border-color 0.2s, background 0.2s;
 }
 
 .btn-ghost:hover {
-  border-color: var(--color-ink);
-  background: rgba(12, 26, 31, 0.03);
+  border-color: var(--color-accent);
+  background: rgba(43, 89, 255, 0.04);
 }
 
 .field {
   width: 100%;
-  padding: 0.7rem 0.9rem;
+  padding: 0.55rem 0.75rem;
   border: 1.5px solid var(--color-fog);
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   background: white;
   color: var(--color-ink);
   outline: none;
-  transition: border-color 0.15s;
+  font-size: 0.82rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .field:focus {
-  border-color: var(--color-teal);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(43, 89, 255, 0.12);
 }
 
 .panel {
   background: white;
-  border: 1px solid rgba(12, 26, 31, 0.08);
-  border-radius: 0.85rem;
+  border: 1px solid rgba(30, 36, 51, 0.06);
+  border-radius: 1.1rem;
+  box-shadow: 0 10px 30px rgba(30, 36, 51, 0.04);
+}
+
+.sidebar-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: 0;
+  padding: 0.55rem 0.95rem;
+  border-radius: 0.9rem 0 0 0.9rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar-nav-item:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav-item.is-active {
+  background: white;
+  color: var(--color-accent);
+  font-weight: 700;
+  z-index: 1;
+}
+
+.sidebar-nav-item.is-active::before,
+.sidebar-nav-item.is-active::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  background: transparent;
+}
+
+.sidebar-nav-item.is-active::before {
+  top: -18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 4px 4px 0 4px white;
+}
+
+.sidebar-nav-item.is-active::after {
+  bottom: -18px;
+  border-top-right-radius: 18px;
+  box-shadow: 4px -4px 0 4px white;
+}
+
+.data-row {
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.data-row:hover,
+.data-row.is-selected {
+  background: var(--color-accent);
+  color: white;
+  box-shadow: 0 12px 28px rgba(43, 89, 255, 0.28);
+  border-radius: 1rem;
+}
+
+.data-row:hover .text-muted,
+.data-row.is-selected .text-muted,
+.data-row:hover .status-pill,
+.data-row.is-selected .status-pill {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .scrollbar-thin::-webkit-scrollbar {

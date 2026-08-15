@@ -97,39 +97,39 @@ export default function Landing() {
         <div className="animate-rise-delay-2 relative">
           <div className="animate-drift absolute -right-4 -top-6 h-40 w-40 rounded-full bg-accent/20 blur-2xl animate-pulse-soft" />
           <div className="absolute -bottom-8 -left-6 h-44 w-44 rounded-full bg-teal/15 blur-2xl" />
-          <div className="relative overflow-hidden rounded-2xl border border-ink/10 bg-ink shadow-[0_30px_80px_rgba(12,26,31,0.25)]">
+          <div className="relative overflow-hidden rounded-[28px] border border-ink/8 bg-accent shadow-[0_30px_80px_rgba(43,89,255,0.28)]">
             <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-              <span className="h-2.5 w-2.5 rounded-full bg-amber" />
-              <span className="h-2.5 w-2.5 rounded-full bg-teal" />
-              <span className="ml-2 text-xs text-white/50">atelier.app / dashboard</span>
+              <span className="h-2.5 w-2.5 rounded-full bg-white/90" />
+              <span className="h-2.5 w-2.5 rounded-full bg-white/50" />
+              <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
+              <span className="ml-2 text-xs text-white/60">atelier.app / dashboard</span>
             </div>
             <div className="grid gap-3 p-4 sm:grid-cols-3">
-              <div className="rounded-lg bg-white/5 p-3 sm:col-span-2">
-                <p className="text-xs text-white/50">Revenue this month</p>
+              <div className="rounded-2xl bg-white/10 p-3 sm:col-span-2">
+                <p className="text-xs text-white/60">Revenue this month</p>
                 <p className="mt-1 font-display text-2xl font-bold text-white">$16,500</p>
                 <svg viewBox="0 0 240 60" className="mt-3 w-full" aria-hidden>
                   <path
                     d="M0 45 C40 40, 60 20, 90 28 S140 50, 170 22 S210 10, 240 18"
                     fill="none"
-                    stroke="#E25B2A"
+                    stroke="#FFFFFF"
                     strokeWidth="2.5"
                     strokeDasharray="240"
                     style={{ animation: 'draw-line 1.6s ease forwards' }}
                   />
                 </svg>
               </div>
-              <div className="rounded-lg bg-white/5 p-3">
-                <p className="text-xs text-white/50">Active</p>
+              <div className="rounded-2xl bg-white/10 p-3">
+                <p className="text-xs text-white/60">Active</p>
                 <p className="mt-1 font-display text-2xl font-bold text-white">4</p>
-                <p className="text-xs text-teal-soft/80">projects</p>
+                <p className="text-xs text-white/70">projects</p>
               </div>
-              <div className="rounded-lg bg-accent/90 p-3 sm:col-span-1">
-                <p className="text-xs text-white/80">Overdue</p>
-                <p className="mt-1 font-display text-xl font-bold text-white">1 invoice</p>
+              <div className="rounded-2xl bg-white p-3 sm:col-span-1">
+                <p className="text-xs text-muted">Overdue</p>
+                <p className="mt-1 font-display text-xl font-bold text-accent">1 invoice</p>
               </div>
-              <div className="rounded-lg bg-white/5 p-3 sm:col-span-2">
-                <p className="text-xs text-white/50">Next up</p>
+              <div className="rounded-2xl bg-white/10 p-3 sm:col-span-2">
+                <p className="text-xs text-white/60">Next up</p>
                 <p className="mt-1 text-sm font-semibold text-white">Northwind design review · Thu 2:00</p>
               </div>
             </div>

@@ -1,176 +1,162 @@
 # Studio Management System
 
-A complete SaaS web app for freelancers and small creative studios. Manage clients, projects, tasks, invoices, time, calendar, and reporting in one workspace.
-
-Live product brand in the UI: **Atelier**.
+**Atelier** is a complete studio operating system for freelancers and small creative teams. It keeps clients, projects, tasks, invoices, time, and calendar in one workspace so you can run work from first lead to paid invoice.
 
 Repository: [Mierul01/studio-management-system](https://github.com/Mierul01/studio-management-system)
 
----
+![Atelier dashboard — cobalt sidebar, metric cards, projects, and upcoming events](docs/dashboard.png)
 
-## What this system is for
-
-Studios often juggle spreadsheets, chat, and separate billing tools. This product is a **studio operating system**: one place to run client work from first lead to paid invoice.
-
-Typical users:
-- Freelance designers, developers, and marketers
-- Small studio owners (1–5 people)
-- Sellers who want a ready-made SaaS demo to customize and sell
-
-Core job of the product:
-1. Capture and organize **clients**
-2. Run **projects** and **tasks**
-3. Track **time** against work
-4. Create and follow **invoices**
-5. Plan work on a **calendar**
-6. Review performance in **reports**
+The screenshot above is the live **Dashboard**: a full-page SaaS layout with a cobalt sidebar, compact header, revenue cards, project progress, and upcoming meetings or deadlines.
 
 ---
 
-## Product map
+## What this system is
 
-### Public website
-| Page | Purpose |
-|------|---------|
-| Landing | Brand, product story, feature overview, demo CTA |
-| Login | Optional sign-in (browser-local accounts) |
-| Register | Optional account creation |
+Studios usually split work across spreadsheets, chat, and a separate billing tool. Atelier is built as one product you can demo, use, or sell:
 
-Auth is optional. Users can open a full **demo workspace** without registering.
+- Capture **clients** and pipeline value
+- Run **projects** and a **task** board
+- Log **time**, send **invoices**, and watch what is paid or overdue
+- Plan meetings and deadlines on a **calendar**
+- Review performance in **reports**
+
+Typical users: freelance designers and developers, small studio owners, and anyone who needs a ready SaaS demo to customize.
+
+---
+
+## How the product works
+
+### Public site
+| Page | What it does |
+|------|----------------|
+| Landing | Product story, feature list, sign in / register, demo launch |
+| Login | Optional account sign-in (saved in this browser) |
+| Register | Optional studio account creation |
+
+Login and register are optional. **Open the demo** loads a full workspace with sample data so buyers can click around immediately.
 
 ### App workspace
 | Module | What it does |
 |--------|----------------|
-| Dashboard | Revenue, outstanding invoices, active projects, open tasks, upcoming events |
-| Clients | CRUD roster for leads / active / paused clients and pipeline value |
-| Projects | Budget, status, progress, due dates, linked to clients |
-| Tasks | Kanban board (`todo` / `doing` / `done`) with priorities |
-| Invoices | Draft → send → paid / overdue flow with amounts and notes |
-| Time | Live timer + manual logs, billable flags, totals |
-| Calendar | Month grid, meetings / deadlines / reminders |
-| Reports | Paid / sent / overdue / draft totals, hours by project, client value |
-| Profile | Studio identity: name, role, bio, phone, location, website |
-| Settings | Workspace preferences and notification toggles |
-| Messages | Inbox for client threads (opened from notification bell) |
-| Files | Project file library (available in app routes) |
-| Help | In-app guides linked from the header help icon |
+| Dashboard | Paid revenue, outstanding invoices, active projects, open tasks, upcoming events |
+| Clients | Add / edit / delete leads, active, and paused clients |
+| Projects | Budget, status, progress bar, due date, linked to a client |
+| Tasks | Kanban board: todo → doing → done, with priority |
+| Invoices | Draft → send → paid / overdue |
+| Time | Live timer plus manual billable logs |
+| Calendar | Month view for meetings, deadlines, reminders |
+| Reports | Invoice totals, hours by project, top clients |
+| Settings | Workspace preferences |
+| Profile | Studio identity (opened from the sidebar name or avatar) |
+| Messages | Client inbox (opened from the notification bell) |
+| Help | Short in-app guides |
+
+**Sidebar** stays on the important daily modules: Dashboard, Clients, Projects, Tasks, Invoices, Time, Calendar, Reports, Settings.
+
+**Bell** opens a notification popup first. Clicking a row opens that exact message. **Name + avatar** at the bottom of the sidebar opens Profile.
+
+---
+
+## Interface design
+
+The app shell matches a modern SaaS dashboard:
+
+- Full-page layout (no outer gap around the window)
+- Cobalt blue sidebar with a white “cut-in” tab for the active page
+- Compact white header: page title, count/subtitle, action button, bell, search, avatar, log out
+- Soft gray page background, rounded white cards, status pills with colored dots
+- Tables (Clients, Invoices) highlight the hovered row in blue
+- Typography: **Plus Jakarta Sans**, sized to stay compact on a dashboard rather than oversized marketing type
 
 ---
 
 ## System design
 
-### Architecture
 ```
 Browser (React SPA)
-  ├── Landing / Auth routes
+  ├── Landing / Login / Register
   └── App shell
-        ├── Fixed sidebar navigation
-        ├── Top header (date, page title, actions, notifications)
+        ├── Fixed cobalt sidebar
+        ├── Compact header + notification popup
         └── Feature pages
-              └── DataContext + AuthContext
-                    └── localStorage persistence
+              └── AuthContext + DataContext
+                    └── localStorage
 ```
 
-Stack:
-- **React 19** + **TypeScript**
-- **Vite** for build/dev
-- **React Router** for routing
-- **Tailwind CSS v4** for styling
-- **localStorage** for users, session, and workspace data (no backend required)
+**Stack:** React 19, TypeScript, Vite, React Router, Tailwind CSS v4.
 
-This is a front-end complete product. Suitable for demos, sales showcases, and later backend upgrade (API / database / real auth).
+This is a front-end complete product. No server is required. It is ready to demo or sell, and can later sit on a real API, database, and auth.
 
-### Auth model
-- Users register with name, email, password, company
-- Passwords stay in local browser storage (demo-grade, not production security)
-- Session keeps `{ user, isDemo }`
-- Demo mode loads seeded studio data for immediate exploration
-- Logout clears the session and returns to landing
+### Auth
+- Register with name, email, password, company
+- Accounts and passwords stay in the browser (demo-grade, not production security)
+- Session stores `{ user, isDemo }`
+- Demo mode loads seeded studio data
+- Log out clears the session and returns to landing
 
-### Data model (main entities)
-- **User** — profile + studio identity
-- **Client** — contact, status, value, notes
-- **Project** — client link, budget, progress, status
-- **Task** — project link, priority, kanban status
-- **Invoice** — client link, amount, lifecycle status
-- **TimeEntry** — project link, minutes, billable flag
+### Main data
+- **User** — profile and studio identity
+- **Client** — contact, status, pipeline value
+- **Project** — client, budget, progress, status
+- **Task** — project, priority, kanban status
+- **Invoice** — client, amount, lifecycle
+- **TimeEntry** — project, minutes, billable flag
 - **CalendarEvent** — meeting / deadline / reminder
 - **Message** — inbox notifications
-- **FileItem** — named assets tied to projects
+- **FileItem** — assets tied to projects
 
-Seed data ships with realistic sample clients and projects so the demo feels alive on first open.
-
-### Persistence keys
-- `atelier_users` — registered accounts
-- `atelier_session` — current session
-- `atelier_data_demo` — demo workspace
-- `atelier_data_<userId>` — per-user workspace
-
-### UI / UX design
-- Brand-first landing (cool mist atmosphere, ink + accent coral, teal highlights)
-- Typography: **Bricolage Grotesque** (display) + **Source Sans 3** (body)
-- App shell:
-  - Sidebar fixed (does not scroll with page)
-  - Compact white header with date + current page title
-  - Orange contextual action button
-  - Bell opens a **notification popup** first; clicking an item opens that exact message (`/app/messages?id=...`)
-  - Help and logout as icon actions
-- Active menu state uses light teal background + orange left accent (not a dark fill)
-- Bottom of sidebar shows **name + company** and opens Profile
-
-### Navigation philosophy
-Sidebar keeps the important day-to-day modules only:
-Dashboard, Clients, Projects, Tasks, Invoices, Time, Calendar, Reports, Settings
-
-Messages are reached from the bell. Profile is reached from the sidebar user block.
+### Persistence
+| Key | Stores |
+|-----|--------|
+| `atelier_users` | Registered accounts |
+| `atelier_session` | Current session |
+| `atelier_data_demo` | Demo workspace |
+| `atelier_data_<userId>` | Per-user workspace |
 
 ---
 
 ## Getting started
 
-Requires Node.js 20+ (recommended: 22).
+Requires Node.js 20+ (22 recommended).
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the local URL Vite prints (usually `http://localhost:5173`).
+Open the URL Vite prints (usually `http://localhost:5173`).
 
-### Scripts
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Typecheck + production build to `dist/` |
+| `npm run dev` | Development server |
+| `npm run build` | Typecheck and production build to `dist/` |
 | `npm run preview` | Preview the production build |
 
 ---
 
-## How to demo / sell
+## How to demo
 
 1. Open the landing page
 2. Click **Open the demo** (or Sign in / Register)
-3. Walk buyers through:
-   - Dashboard overview
-   - Clients → Projects → Tasks flow
-   - Time tracking → Invoices → Reports
-4. Show Profile + notification bell behavior
+3. Walk through Dashboard → Clients → Projects → Tasks
+4. Show Time → Invoices → Reports
+5. Click the bell, then a notification, to prove it opens the correct message
+6. Click the sidebar name to open Profile
 
-Deploy `dist/` to any static host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
+Deploy the `dist/` folder to Vercel, Netlify, Cloudflare Pages, or GitHub Pages.
 
 ---
 
-## Roadmap ideas (optional next layer)
+## Possible next layer
 
-- Real backend (auth, Postgres/Supabase)
+- Real backend (auth + database)
 - Team seats and roles
 - PDF invoice export
-- Email sending for invoices/messages
+- Email for invoices and messages
 - Stripe / payment links
-- Multi-currency accounting
 
 ---
 
 ## License
 
-Private/commercial use by the repo owner unless otherwise stated.
+Private / commercial use by the repo owner unless otherwise stated.

@@ -53,51 +53,53 @@ export default function Invoices() {
       {data.invoices.length === 0 ? (
         <EmptyState title="No invoices" hint="Create an invoice when you are ready to bill." />
       ) : (
-        <div className="panel overflow-hidden">
+        <div className="panel overflow-hidden p-2 sm:p-3">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[700px] text-left text-sm">
-              <thead className="border-b border-ink/8 bg-mist/50 text-xs uppercase tracking-wide text-muted">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead className="text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Number</th>
-                  <th className="px-4 py-3 font-semibold">Client</th>
-                  <th className="px-4 py-3 font-semibold">Amount</th>
-                  <th className="px-4 py-3 font-semibold">Status</th>
-                  <th className="px-4 py-3 font-semibold">Due</th>
-                  <th className="px-4 py-3 font-semibold" />
+                  <th className="px-4 py-3">Number</th>
+                  <th className="px-4 py-3">Client</th>
+                  <th className="px-4 py-3">Amount</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Due</th>
+                  <th className="px-4 py-3">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {data.invoices.map((inv) => (
-                  <tr key={inv.id} className="border-b border-ink/5 last:border-0">
+                  <tr key={inv.id} className="data-row">
                     <td className="px-4 py-3 font-semibold">{inv.number}</td>
                     <td className="px-4 py-3">{clientName(inv.clientId)}</td>
-                    <td className="px-4 py-3">{formatMoney(inv.amount)}</td>
+                    <td className="px-4 py-3 font-medium">{formatMoney(inv.amount)}</td>
                     <td className="px-4 py-3">
                       <StatusPill status={inv.status} />
                     </td>
                     <td className="px-4 py-3 text-muted">{inv.dueDate}</td>
-                    <td className="px-4 py-3 text-right space-x-2">
-                      {inv.status !== 'paid' && (
-                        <button
-                          type="button"
-                          className="text-sm font-semibold text-teal"
-                          onClick={() => updateInvoice(inv.id, { status: 'paid' })}
-                        >
-                          Mark paid
+                    <td className="px-4 py-3">
+                      <div className="flex flex-wrap gap-3">
+                        {inv.status !== 'paid' && (
+                          <button
+                            type="button"
+                            className="text-sm font-semibold"
+                            onClick={() => updateInvoice(inv.id, { status: 'paid' })}
+                          >
+                            Mark paid
+                          </button>
+                        )}
+                        {inv.status === 'draft' && (
+                          <button
+                            type="button"
+                            className="text-sm font-semibold"
+                            onClick={() => updateInvoice(inv.id, { status: 'sent' })}
+                          >
+                            Send
+                          </button>
+                        )}
+                        <button type="button" className="text-sm font-semibold opacity-80" onClick={() => deleteInvoice(inv.id)}>
+                          Delete
                         </button>
-                      )}
-                      {inv.status === 'draft' && (
-                        <button
-                          type="button"
-                          className="text-sm font-semibold text-accent"
-                          onClick={() => updateInvoice(inv.id, { status: 'sent' })}
-                        >
-                          Send
-                        </button>
-                      )}
-                      <button type="button" className="text-sm font-semibold text-danger" onClick={() => deleteInvoice(inv.id)}>
-                        Delete
-                      </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
